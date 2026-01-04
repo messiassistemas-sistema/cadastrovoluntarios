@@ -1,0 +1,5 @@
+{
+  "name": "MVP - Sistema de Cadastro de Voluntários",
+  "description": "Um portal ministerial para cadastro, validação e encaminhamento de voluntários para o Ministério Vida na Palavra, com lógica condicional e integração inteligente.",
+  "requestFramePermissions": []
+}
