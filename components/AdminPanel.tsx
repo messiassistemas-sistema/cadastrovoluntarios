@@ -646,52 +646,55 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ userRole }) => {
             )}
 
             {tab === 'TREINAMENTO' && (
-                <section className="space-y-4" aria-labelledby="training-section-title">
+                <section className="space-y-3" aria-labelledby="training-section-title">
                     <h3 id="training-section-title" className="sr-only">Acompanhamento de Treinamento</h3>
                     {training.map(t => (
-                        <div key={t.volunteerId} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                            <div className="flex justify-between items-center mb-6">
-                                <div>
-                                    <h4 className="font-bold text-slate-800">{t.nomeCompleto}</h4>
-                                    <p className="text-xs text-slate-500">Início: {t.dataInicio}</p>
+                        <div key={t.volunteerId} className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-indigo-200 transition-colors">
+                            <div className="flex-1">
+                                <h4 className="font-bold text-slate-800">{t.nomeCompleto}</h4>
+                                <div className="flex items-center gap-2 mt-1">
+                                    <span className="text-[10px] bg-slate-100 px-2 py-0.5 rounded text-slate-500 font-medium">Início: {t.dataInicio}</span>
+                                    <span className={`text-[10px] px-2 py-0.5 rounded font-bold uppercase ${t.status?.includes('Pendente') ? 'bg-amber-100 text-amber-700' : 'bg-indigo-100 text-indigo-700'}`}>
+                                        {t.status}
+                                    </span>
                                 </div>
-                                <span className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">{t.status}</span>
                             </div>
-                            <div className="grid grid-cols-5 gap-2" role="group" aria-label={`Progresso de aulas de ${t.nomeCompleto}`}>
+
+                            <div className="flex items-center gap-2" role="group" aria-label={`Progresso de aulas de ${t.nomeCompleto}`}>
                                 {t.aulas.map((completed, i) => {
                                     const classNum = i + 1;
                                     return (
-                                        <div key={i} className="text-center">
-                                            <button
-                                                onClick={async () => {
-                                                    const newState = !completed;
-                                                    // Optimistic UI update
-                                                    setTraining(prev => prev.map(r => {
-                                                        if (r.volunteerId === t.volunteerId) {
-                                                            const newAulas = [...r.aulas];
-                                                            newAulas[i] = newState;
-                                                            return { ...r, aulas: newAulas };
-                                                        }
-                                                        return r;
-                                                    }));
-
-                                                    try {
-                                                        await VolunteerService.updateTrainingAttendance(t.volunteerId, classNum, newState);
-                                                    } catch (e) {
-                                                        alert("Erro ao atualizar presença");
-                                                        // Revert on error could be implemented here
+                                        <button
+                                            key={i}
+                                            onClick={async () => {
+                                                const newState = !completed;
+                                                // Optimistic UI update
+                                                setTraining(prev => prev.map(r => {
+                                                    if (r.volunteerId === t.volunteerId) {
+                                                        const newAulas = [...r.aulas];
+                                                        newAulas[i] = newState;
+                                                        return { ...r, aulas: newAulas };
                                                     }
-                                                }}
-                                                className={`w-full aspect-square rounded-xl border-2 flex items-center justify-center mb-1 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${completed
-                                                    ? 'bg-green-500 border-green-600 text-white shadow-md hover:bg-green-600'
-                                                    : 'bg-white border-slate-300 text-slate-300 hover:border-indigo-300 hover:text-indigo-300'
-                                                    }`}
-                                                title={`Aula ${classNum} - Clique para alterar`}
-                                            >
-                                                <i className={`fas ${completed ? 'fa-check' : 'fa-circle'}`} aria-hidden="true"></i>
-                                            </button>
-                                            <span className={`text-[10px] font-bold uppercase ${completed ? 'text-green-600' : 'text-slate-400'}`}>Aula {classNum}</span>
-                                        </div>
+                                                    return r;
+                                                }));
+
+                                                try {
+                                                    await VolunteerService.updateTrainingAttendance(t.volunteerId, classNum, newState);
+                                                } catch (e) {
+                                                    alert("Erro ao atualizar presença");
+                                                }
+                                            }}
+                                            className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-xs font-bold transition-all ${completed
+                                                ? 'bg-green-50 border-green-200 text-green-700 hover:bg-green-100'
+                                                : 'bg-white border-slate-200 text-slate-400 hover:border-indigo-300 hover:text-indigo-500'
+                                                }`}
+                                            title={`Marcar Aula ${classNum}`}
+                                        >
+                                            <div className={`w-4 h-4 rounded border flex items-center justify-center ${completed ? 'bg-green-500 border-green-500 text-white' : 'bg-white border-slate-300'}`}>
+                                                {completed && <i className="fas fa-check text-[10px]"></i>}
+                                            </div>
+                                            Aula {classNum}
+                                        </button>
                                     );
                                 })}
                             </div>
