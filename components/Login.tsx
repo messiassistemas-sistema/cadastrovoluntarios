@@ -34,22 +34,22 @@ const Login: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
         }
     };
 
-    const inputBaseStyle = "w-full p-4 bg-white border border-slate-300 text-slate-900 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all placeholder:text-slate-400 hover:border-slate-400";
+    const inputBaseStyle = "w-full p-4 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-white rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 hover:border-slate-400 dark:hover:border-slate-500";
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fadeIn">
-            <div className="bg-white w-full max-w-sm rounded-3xl shadow-2xl p-8 border border-slate-100">
+            <div className="bg-white dark:bg-slate-800 w-full max-w-sm rounded-3xl shadow-2xl p-8 border border-slate-100 dark:border-slate-700 transition-colors">
                 <div className="text-center mb-6">
-                    <div className="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <div className="w-16 h-16 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 rounded-2xl flex items-center justify-center mx-auto mb-4">
                         <i className="fas fa-user-shield text-2xl"></i>
                     </div>
-                    <h3 className="text-xl font-bold text-slate-800">Acesso Restrito</h3>
-                    <p className="text-sm text-slate-500">Faça login para continuar</p>
+                    <h3 className="text-xl font-bold text-slate-800 dark:text-white">Acesso Restrito</h3>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">Faça login para continuar</p>
                 </div>
 
                 <form onSubmit={handleLogin} className="space-y-4">
                     <div>
-                        <label className="block text-xs font-bold text-slate-500 mb-1 ml-1">E-mail</label>
+                        <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 ml-1">E-mail</label>
                         <input
                             type="email"
                             required
@@ -60,7 +60,7 @@ const Login: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
                         />
                     </div>
                     <div>
-                        <label className="block text-xs font-bold text-slate-500 mb-1 ml-1">Senha</label>
+                        <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 ml-1">Senha</label>
                         <input
                             type="password"
                             required
@@ -72,7 +72,7 @@ const Login: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
                     </div>
 
                     {error && (
-                        <div className="p-3 bg-red-50 text-red-600 text-xs rounded-lg font-medium border border-red-100">
+                        <div className="p-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-xs rounded-lg font-medium border border-red-100 dark:border-red-900/50">
                             {error}
                         </div>
                     )}
@@ -81,7 +81,7 @@ const Login: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
                         <button
                             type="button"
                             onClick={onCancel}
-                            className="flex-1 py-3 font-bold text-slate-400 hover:text-slate-600 transition-colors"
+                            className="flex-1 py-3 font-bold text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
                         >
                             Cancelar
                         </button>

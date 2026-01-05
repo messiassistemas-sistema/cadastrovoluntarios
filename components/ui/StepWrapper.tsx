@@ -14,12 +14,12 @@ const StepWrapper: React.FC<{ children: React.ReactNode; title?: string }> = ({ 
                     id="step-title"
                     ref={titleRef}
                     tabIndex={-1}
-                    className="text-xl font-semibold mb-6 text-slate-800 border-l-4 border-indigo-600 pl-3 focus:outline-none"
+                    className="text-xl font-semibold mb-6 text-slate-800 dark:text-white border-l-4 border-indigo-600 pl-3 focus:outline-none"
                 >
                     {title}
                 </h2>
             )}
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 animate-fadeIn">
+            <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 animate-fadeIn transition-colors">
                 {children}
             </div>
         </div>

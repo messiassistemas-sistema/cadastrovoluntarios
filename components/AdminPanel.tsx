@@ -21,19 +21,19 @@ const ConfigurationSection: React.FC = () => {
     };
 
     return (
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-            <h3 className="font-bold text-slate-800 text-lg mb-4 flex items-center gap-2">
-                <i className="fas fa-paintbrush text-indigo-600"></i>
+        <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+            <h3 className="font-bold text-slate-800 dark:text-white text-lg mb-4 flex items-center gap-2">
+                <i className="fas fa-paintbrush text-indigo-600 dark:text-indigo-400"></i>
                 Identidade Visual
             </h3>
-            <p className="text-slate-500 text-sm mb-6">
+            <p className="text-slate-500 dark:text-slate-400 text-sm mb-6">
                 Personalize o nome do portal e o logotipo.
             </p>
 
-            <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl mb-6 flex items-center justify-between">
+            <div className="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 p-4 rounded-xl mb-6 flex items-center justify-between">
                 <div>
-                    <h4 className="font-bold text-slate-800">Status do Cadastro</h4>
-                    <p className="text-xs text-slate-500">
+                    <h4 className="font-bold text-slate-800 dark:text-white">Status do Cadastro</h4>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
                         {registrationOpen
                             ? "O formulário está ABERTO para novos voluntários."
                             : "O formulário está FECHADO. Apenas a tela de aviso será exibida."}
@@ -41,7 +41,7 @@ const ConfigurationSection: React.FC = () => {
                 </div>
                 <button
                     onClick={() => updateConfig({ registrationOpen: !registrationOpen })}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${registrationOpen ? 'bg-green-500' : 'bg-slate-300'}`}
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${registrationOpen ? 'bg-green-500' : 'bg-slate-300 dark:bg-slate-600'}`}
                 >
                     <span
                         className={`${registrationOpen ? 'translate-x-6' : 'translate-x-1'} inline-block h-4 w-4 transform rounded-full bg-white transition-transform`}
@@ -52,37 +52,37 @@ const ConfigurationSection: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                     <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-1">Nome do Aplicativo</label>
+                        <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Nome do Aplicativo</label>
                         <input
                             type="text"
                             value={appName}
                             onChange={(e) => updateConfig({ appName: e.target.value })}
-                            className="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none"
+                            className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-semibold text-slate-700 mb-1">Nome da Organização</label>
+                        <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Nome da Organização</label>
                         <input
                             type="text"
                             value={orgName}
                             onChange={(e) => updateConfig({ orgName: e.target.value })}
-                            className="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none"
+                            className="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white"
                         />
                     </div>
                 </div>
 
                 <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1">Logotipo</label>
+                    <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1">Logotipo</label>
                     <div className="flex items-center gap-4">
-                        <div className="w-24 h-24 bg-slate-50 rounded-xl border-2 border-dashed border-slate-300 flex items-center justify-center overflow-hidden relative">
+                        <div className="w-24 h-24 bg-slate-50 dark:bg-slate-900/50 rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-600 flex items-center justify-center overflow-hidden relative">
                             {logoUrl ? (
                                 <img src={logoUrl} alt="Logo" className="w-full h-full object-contain" />
                             ) : (
-                                <span className="text-slate-300 text-xs text-center p-2">Sem logo</span>
+                                <span className="text-slate-300 dark:text-slate-500 text-xs text-center p-2">Sem logo</span>
                             )}
                         </div>
                         <div className="flex-1">
-                            <label className="block w-full cursor-pointer bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold py-2 px-4 rounded-lg text-center transition-colors text-sm">
+                            <label className="block w-full cursor-pointer bg-indigo-50 dark:bg-indigo-900/30 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 text-indigo-700 dark:text-indigo-400 font-bold py-2 px-4 rounded-lg text-center transition-colors text-sm">
                                 <i className="fas fa-upload mr-2"></i> Alterar Logo
                                 <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
                             </label>
@@ -412,13 +412,13 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ userRole }) => {
                     </div>
                 </div>
             )}
-            <nav className="flex bg-white rounded-xl shadow-sm border border-slate-100 mb-8 overflow-x-auto" aria-label="Navegação Administrativa">
+            <nav className="flex bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 mb-8 overflow-x-auto" aria-label="Navegação Administrativa">
                 {(['DASHBOARD', 'LISTA', 'TREINAMENTO'] as AdminTab[]).map(t => (
                     <button
                         key={t}
                         onClick={() => setTab(t)}
                         aria-current={tab === t ? 'page' : undefined}
-                        className={`flex-1 min-w-[100px] py-4 font-bold text-xs transition-all focus:ring-inset focus:ring-2 focus:ring-indigo-500 outline-none uppercase tracking-widest ${tab === t ? 'bg-indigo-600 text-white' : 'text-slate-500 hover:bg-slate-50'}`}
+                        className={`flex-1 min-w-[100px] py-4 font-bold text-xs transition-all focus:ring-inset focus:ring-2 focus:ring-indigo-500 outline-none uppercase tracking-widest ${tab === t ? 'bg-indigo-600 text-white' : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700'}`}
                     >
                         {t}
                     </button>
@@ -428,7 +428,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ userRole }) => {
                     <button
                         onClick={() => setTab('CONFIGURACAO')}
                         aria-current={tab === 'CONFIGURACAO' ? 'page' : undefined}
-                        className={`flex-1 min-w-[100px] py-4 font-bold text-xs transition-all focus:ring-inset focus:ring-2 focus:ring-indigo-500 outline-none uppercase tracking-widest ${tab === 'CONFIGURACAO' ? 'bg-indigo-600 text-white' : 'text-slate-500 hover:bg-slate-50'}`}
+                        className={`flex-1 min-w-[100px] py-4 font-bold text-xs transition-all focus:ring-inset focus:ring-2 focus:ring-indigo-500 outline-none uppercase tracking-widest ${tab === 'CONFIGURACAO' ? 'bg-indigo-600 text-white' : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700'}`}
                     >
                         Configuração
                     </button>
@@ -444,25 +444,25 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ userRole }) => {
                             { label: 'Integração', val: stats.integracao, color: 'amber', icon: 'fa-sync' },
                             { label: 'Escola Reino', val: stats.escola, color: 'red', icon: 'fa-book-open' }
                         ].map(s => (
-                            <div key={s.label} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                                <div className={`w-10 h-10 bg-${s.color}-100 text-${s.color}-600 rounded-lg flex items-center justify-center mb-4`} aria-hidden="true">
+                            <div key={s.label} className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div className={`w-10 h-10 bg-${s.color}-100 dark:bg-${s.color}-900/30 text-${s.color}-600 dark:text-${s.color}-400 rounded-lg flex items-center justify-center mb-4`} aria-hidden="true">
                                     <i className={`fas ${s.icon}`}></i>
                                 </div>
-                                <p className="text-slate-500 text-[10px] font-bold uppercase tracking-wider">{s.label}</p>
-                                <h3 className="text-3xl font-black text-slate-800">{s.val}</h3>
+                                <p className="text-slate-500 dark:text-slate-400 text-[10px] font-bold uppercase tracking-wider">{s.label}</p>
+                                <h3 className="text-3xl font-black text-slate-800 dark:text-white">{s.val}</h3>
                             </div>
                         ))}
                     </section>
 
                     <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                            <h4 className="font-bold text-slate-800 mb-6 flex items-center gap-2">
-                                <i className="fas fa-chart-pie text-indigo-500"></i> Distribuição de Status
+                        <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                            <h4 className="font-bold text-slate-800 dark:text-white mb-6 flex items-center gap-2">
+                                <i className="fas fa-chart-pie text-indigo-500 dark:text-indigo-400"></i> Distribuição de Status
                             </h4>
                             <div className="flex flex-col md:flex-row items-center justify-around gap-8">
                                 <div className="relative w-40 h-40">
                                     <svg viewBox="0 0 36 36" className="w-full h-full transform -rotate-90">
-                                        <circle cx="18" cy="18" r="15.915" fill="transparent" stroke="#f1f5f9" strokeWidth="3" />
+                                        <circle cx="18" cy="18" r="15.915" fill="transparent" className="text-slate-100 dark:text-slate-700 transition-colors" stroke="currentColor" strokeWidth="3" />
                                         <circle cx="18" cy="18" r="15.915" fill="transparent" stroke="#6366f1" strokeWidth="3"
                                             strokeDasharray={`${stats.aptosPerc} ${100 - stats.aptosPerc}`}
                                             strokeDashoffset="0" />
@@ -472,39 +472,39 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ userRole }) => {
                                             strokeDashoffset={0 - stats.aptosPerc} />
                                     </svg>
                                     <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                        <span className="text-2xl font-black text-slate-800">{stats.total}</span>
+                                        <span className="text-2xl font-black text-slate-800 dark:text-white">{stats.total}</span>
                                         <span className="text-[10px] text-slate-400 font-bold">TOTAL</span>
                                     </div>
                                 </div>
                                 <div className="space-y-3 w-full max-w-[200px]">
                                     <div className="flex items-center justify-between text-xs">
-                                        <span className="flex items-center gap-2 font-bold text-slate-600"><span className="w-3 h-3 rounded-full bg-indigo-500"></span> Aptos</span>
-                                        <span className="font-black">{Math.round(stats.aptosPerc)}%</span>
+                                        <span className="flex items-center gap-2 font-bold text-slate-600 dark:text-slate-300"><span className="w-3 h-3 rounded-full bg-indigo-500"></span> Aptos</span>
+                                        <span className="font-black dark:text-white">{Math.round(stats.aptosPerc)}%</span>
                                     </div>
                                     <div className="flex items-center justify-between text-xs">
-                                        <span className="flex items-center gap-2 font-bold text-slate-600"><span className="w-3 h-3 rounded-full bg-amber-500"></span> Integração</span>
-                                        <span className="font-black">{Math.round(stats.integracaoPerc)}%</span>
+                                        <span className="flex items-center gap-2 font-bold text-slate-600 dark:text-slate-300"><span className="w-3 h-3 rounded-full bg-amber-500"></span> Integração</span>
+                                        <span className="font-black dark:text-white">{Math.round(stats.integracaoPerc)}%</span>
                                     </div>
                                     <div className="flex items-center justify-between text-xs">
-                                        <span className="flex items-center gap-2 font-bold text-slate-600"><span className="w-3 h-3 rounded-full bg-red-500"></span> Escola</span>
-                                        <span className="font-black">{Math.round(stats.escolaPerc)}%</span>
+                                        <span className="flex items-center gap-2 font-bold text-slate-600 dark:text-slate-300"><span className="w-3 h-3 rounded-full bg-red-500"></span> Escola</span>
+                                        <span className="font-black dark:text-white">{Math.round(stats.escolaPerc)}%</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                            <h4 className="font-bold text-slate-800 mb-6 flex items-center gap-2">
-                                <i className="fas fa-chart-bar text-indigo-500"></i> Preferência Ministerial
+                        <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                            <h4 className="font-bold text-slate-800 dark:text-white mb-6 flex items-center gap-2">
+                                <i className="fas fa-chart-bar text-indigo-500 dark:text-indigo-400"></i> Preferência Ministerial
                             </h4>
                             <div className="space-y-4">
                                 {Object.entries(stats.ministriesCount).map(([name, count]) => (
                                     <div key={name}>
-                                        <div className="flex justify-between text-xs mb-1 font-bold text-slate-600">
+                                        <div className="flex justify-between text-xs mb-1 font-bold text-slate-600 dark:text-slate-300">
                                             <span>{name}</span>
                                             <span>{count}</span>
                                         </div>
-                                        <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                                        <div className="h-2 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
                                             <div className="h-full bg-indigo-500 transition-all duration-500"
                                                 style={{ width: `${stats.total > 0 ? (count / stats.total) * 100 : 0}%` }}></div>
                                         </div>

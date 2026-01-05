@@ -6,6 +6,7 @@ import VolunteerForm from './components/VolunteerForm';
 import Login from './components/Login';
 import { ConfigProvider } from './contexts/ConfigContext';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 const AppContent: React.FC = () => {
   const [view, setView] = useState<AppView>('USER_FORM');
@@ -36,7 +37,7 @@ const AppContent: React.FC = () => {
   if (loading) return <div className="min-h-screen flex items-center justify-center bg-slate-50"><i className="fas fa-circle-notch fa-spin text-indigo-600 text-3xl"></i></div>;
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col transition-colors duration-300">
       <Header
         currentView={view}
         onToggleView={handleAdminToggle}
@@ -53,8 +54,8 @@ const AppContent: React.FC = () => {
             <AdminPanel userRole={userRole} />
           ) : (
             <div className="text-center pt-20">
-              <p className="text-slate-500">Acesso não autorizado. Por favor faça login.</p>
-              <button onClick={() => setShowLogin(true)} className="mt-4 text-indigo-600 font-bold hover:underline">Ir para Login</button>
+              <p className="text-slate-500 dark:text-slate-400">Acesso não autorizado. Por favor faça login.</p>
+              <button onClick={() => setShowLogin(true)} className="mt-4 text-indigo-600 dark:text-indigo-400 font-bold hover:underline">Ir para Login</button>
             </div>
           )
         ) : (
@@ -62,7 +63,7 @@ const AppContent: React.FC = () => {
         )}
       </main>
 
-      <footer className="text-center py-6 text-slate-400 text-[10px] font-bold uppercase tracking-widest">
+      <footer className="text-center py-6 text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase tracking-widest">
         © {new Date().getFullYear()} Ministério Vida na Palavra - MVP
       </footer>
     </div>
@@ -72,9 +73,11 @@ const AppContent: React.FC = () => {
 const App: React.FC = () => {
   return (
     <ConfigProvider>
-      <AuthProvider>
-        <AppContent />
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <AppContent />
+        </AuthProvider>
+      </ThemeProvider>
     </ConfigProvider>
   );
 };
