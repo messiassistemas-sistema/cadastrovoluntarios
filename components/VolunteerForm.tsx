@@ -481,6 +481,17 @@ const VolunteerForm: React.FC = () => {
                                 <span className="text-slate-500 dark:text-slate-400">Área de Interesse</span>
                                 <span className="font-bold text-indigo-600 dark:text-indigo-400">{formData.ministerioIdentificacao}</span>
                             </div>
+                            <div className="flex justify-between items-center bg-slate-50 dark:bg-slate-900/50 p-3 rounded-lg">
+                                <span className="text-slate-500 dark:text-slate-400">Possui Vícios?</span>
+                                <div className="text-right">
+                                    <span className={`font-bold ${formData.possuiVicios === 'Não' ? 'text-green-600 dark:text-green-400' : 'text-amber-500 dark:text-amber-400'}`}>
+                                        {formData.possuiVicios}
+                                    </span>
+                                    {formData.vicioDescricao && (
+                                        <p className="text-xs text-slate-500 mt-1">{formData.vicioDescricao}</p>
+                                    )}
+                                </div>
+                            </div>
                         </div>
 
                         <div className="pt-4 flex gap-3">
