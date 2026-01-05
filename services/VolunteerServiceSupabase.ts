@@ -182,12 +182,26 @@ export class VolunteerServiceSupabase {
 
     // Delete Volunteer
     static async deleteVolunteer(id: string) {
-        const { error } = await supabase
+        // Debug: Check Session
+        const { data: { session } } = await supabase.auth.getSession();
+        console.log(`[Delete] Current Session User: ${session?.user?.id || 'ANONYMOUS'}`);
+        console.log(`[Delete] Attempting to delete volunteer with ID: ${id}`);
+        const { error, count } = await supabase
             .from('volunteers')
-            .delete()
+            .delete({ count: 'exact' }) // Request count of deleted rows
             .eq('id', id);
 
-        if (error) throw error;
+        if (error) {
+            console.error("Error deleting volunteer:", error);
+            throw error;
+        }
+
+        console.log(`Deletion result - Rows deleted: ${count}`);
+
+        if (count === 0) {
+            console.warn("Delete operation returned 0 rows affected. This might be due to RLS policies preventing deletion.");
+            throw new Error("Não foi possível excluir o voluntário. Verifique se você tem permissão ou se o registro já foi removido.");
+        }
     }
 
     // Ministries Management
