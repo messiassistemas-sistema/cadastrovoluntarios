@@ -1,3 +1,3 @@
--- Add columns for storing addiction information
-ALTER TABLE public.volunteers ADD COLUMN IF NOT EXISTS has_addiction text DEFAULT 'Não';
-ALTER TABLE public.volunteers ADD COLUMN IF NOT EXISTS addiction_details text;
+-- Adiciona colunas para armazenar informações sobre vícios
+ALTER TABLE public.volunteers ADD COLUMN IF NOT EXISTS possui_vicios text DEFAULT 'Não';
+ALTER TABLE public.volunteers ADD COLUMN IF NOT EXISTS descricao_vicio text;

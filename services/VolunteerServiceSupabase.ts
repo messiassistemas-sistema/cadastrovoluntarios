@@ -123,8 +123,8 @@ export class VolunteerServiceSupabase {
                     status_cadastro: 'Apto para Análise Final',
                     dating: formData.estaNamorando,
                     partner_religion: formData.religiaoNamorado,
-                    has_addiction: formData.possuiVicios,
-                    addiction_details: formData.vicioDescricao
+                    possui_vicios: formData.possuiVicios,
+                    descricao_vicio: formData.vicioDescricao
                 }])
                 .select()
                 .single();
@@ -150,8 +150,8 @@ export class VolunteerServiceSupabase {
                 dating,
                 partner_religion,
 
-                has_addiction,
-                addiction_details,
+                possui_vicios,
+                descricao_vicio,
                 escola_reino,
                 aceita_principios,
                 disponibilidade_treinamento,
@@ -186,8 +186,8 @@ export class VolunteerServiceSupabase {
             escolaReino: v.escola_reino,
             estaNamorando: v.dating || false,
             religiaoNamorado: v.partner_religion || '',
-            possuiVicios: v.has_addiction || 'Não',
-            vicioDescricao: v.addiction_details,
+            possuiVicios: v.possui_vicios || 'Não',
+            vicioDescricao: v.descricao_vicio,
             disponivelTreinamento: v.disponibilidade_treinamento
         }));
     }
