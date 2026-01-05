@@ -69,6 +69,16 @@ export class VolunteerServiceSupabase {
             if (existingMember) {
                 memberId = existingMember.id;
                 console.log("Member found, linking to ID:", memberId);
+
+                // Update member details just in case (e.g. marital status changed)
+                await supabase
+                    .from('members')
+                    .update({
+                        marital_status: formData.estadoCivil,
+                        birth_date: formData.dataNascimento,
+                        phone: formData.telefone
+                    })
+                    .eq('id', memberId);
             } else {
                 // 2a. Fetch a valid Church ID (HEADQUARTERS or First available)
                 // This prevents FK errors if the hardcoded ID doesn't exist in PROD
@@ -111,7 +121,9 @@ export class VolunteerServiceSupabase {
                     aceita_principios: formData.aceitaPrincipios,
                     escola_reino: formData.escolaReino,
                     status_cadastro: 'Apto para Análise Final',
-                    observacoes_internas: `Cadastrado em ${new Date().toLocaleString()}`
+                    dating: formData.estaNamorando,
+                    partner_religion: formData.religiaoNamorado,
+
                 }])
                 .select()
                 .single();
@@ -134,6 +146,8 @@ export class VolunteerServiceSupabase {
                 id,
                 ministerio_interesse,
                 status_cadastro,
+                dating,
+                partner_religion,
                 created_at,
                 members (
                     name,
@@ -163,8 +177,9 @@ export class VolunteerServiceSupabase {
             batizado: true, // Assuming true if applying, logic can be improved
             aceitaPrincipios: true,
             escolaReino: false,
-            estaNamorando: false,
-            religiaoNamorado: '',
+            escolaReino: false,
+            estaNamorando: v.dating || false,
+            religiaoNamorado: v.partner_religion || '',
             possuiVicios: 'Não',
             disponivelTreinamento: true
         }));

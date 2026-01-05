@@ -317,10 +317,15 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ userRole }) => {
 
                                     <div>
                                         <p className="text-xs text-slate-400 font-bold uppercase">Estado Civil</p>
-                                        <p className="text-slate-700">{selectedVolunteer.estadoCivil}</p>
+                                        <p className="text-slate-700">
+                                            {selectedVolunteer.estadoCivil}
+                                            {selectedVolunteer.estaNamorando && selectedVolunteer.estadoCivil === 'Solteiro(a)' && (
+                                                <span className="font-bold text-indigo-600 ml-2">(Namorando)</span>
+                                            )}
+                                        </p>
                                         {selectedVolunteer.estaNamorando && (
                                             <p className="text-sm text-slate-500 mt-1">
-                                                Namorando (Religião: {selectedVolunteer.religiaoNamorado})
+                                                <span className="font-semibold">Religião do(a) namorado(a):</span> {selectedVolunteer.religiaoNamorado}
                                             </p>
                                         )}
                                     </div>
@@ -506,7 +511,7 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ userRole }) => {
                                         </div>
                                         <div className="h-2 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
                                             <div className="h-full bg-indigo-500 transition-all duration-500"
-                                                style={{ width: `${stats.total > 0 ? (count / stats.total) * 100 : 0}%` }}></div>
+                                                style={{ width: `${stats.total > 0 ? (Number(count) / Number(stats.total)) * 100 : 0}%` }}></div>
                                         </div>
                                     </div>
                                 ))}
